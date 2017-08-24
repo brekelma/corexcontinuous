@@ -1,14 +1,14 @@
 {
-  "id": "76a565ac5d16a1ce0f16114d8edd1558bcf844fce95240a17072e242af74ffa3",
-  "name": "dsbox.linearcorex",
+  "id": "f86c41db-39fb-395b-84ec-98c160b883da",
+  "name": "dsbox.linearcorex.linearcorex.linearcorex",
   "common_name": "DSBox Linear CorEx",
   "description": "Return components/latent factors that explain the most multivariate mutual information in the data. For comparison, PCA returns components explaining the most variance in the data.",
   "languages": [
     "python2.7"
   ],
   "library": "dsbox",
-  "version": "0.5",
-  "source_code": "https://github.com/gregversteeg/LinearCorex.git",
+  "version": "1.0",
+  "source_code": "https://github.com/brekelma/linearcorex",
   "is_class": true,
   "attributes": [
     {
@@ -53,7 +53,7 @@
   "methods_available": [
     {
       "name": "fit",
-      "id": "dsbox.linearcorex.Corex.fit",
+      "id": "dsbox.linearcorex.linearcorex.linearcorex.Corex.fit",
       "description": "'Fit the model according to the given training data.\n",
       "returns": {
         "type": "object",
@@ -72,7 +72,7 @@
     },
     {
       "name": "transform",
-      "id": "dsbox.linearcorex.Corex.transform",
+      "id": "dsbox.linearcorex.linearcorex.linearcorex.Corex.transform",
       "description": "'Transform data according to learned model.\n",
       "returns": {
         "type": "array-like",
@@ -113,7 +113,7 @@
   "schema_version": 1.0,
   "build": [{
     "type": "pip",
-    "package": "linearcorex"
+    "package": "dsbox-linearcorex"
   }],
   "compute_resources": {
     "sample_size": [100, 100000],
