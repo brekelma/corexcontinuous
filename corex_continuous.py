@@ -2,7 +2,7 @@ from sklearn import preprocessing
 #import primitive
 import sys
 import os
-import LinearCorex.linearcorex.linearcorex as corex_cont
+import linearcorex.linearcorex.linearcorex as corex_cont
 #import LinearCorex.linearcorex as corex_cont
 from collections import defaultdict
 from scipy import sparse
