@@ -54,7 +54,7 @@
       "is_hyperparameter": false
     },
     {
-      "type": "bool",
+      "type": "str",
       "name": "gaussianize",
       "description": "Transform each marginal to be as close to a standard Gaussian as possible. 'standard' (default) just subtracts the mean and scales by the std.  'empirical' does an empirical gaussianization (noninvertible). 'outliers' tries to squeeze in the outliers.",
       "is_hyperparameter": false
@@ -63,6 +63,12 @@
       "type": "bool",
       "name": "anneal",
       "description": "Whether to add noise with decreasing magnitude to increase robustness.",
+      "is_hyperparameter": false
+    },
+    {
+      "type": "bool",
+      "name": "gpu",
+      "description": "Take advantage of GPU comptuational speedup",
       "is_hyperparameter": false
     },
     {
