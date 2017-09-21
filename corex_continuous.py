@@ -9,7 +9,7 @@ from scipy import sparse
 import pandas as pd
 import numpy as np
 
-sys.path.append('../')
+
 from primitive_interfaces.unsupervised_learning import UnsupervisedLearnerPrimitiveBase
 from typing import NamedTuple, Union, Optional, Sequence
 
@@ -17,7 +17,7 @@ from typing import NamedTuple, Union, Optional, Sequence
 Input = pd.DataFrame
 Output = np.ndarray
 Params = NamedTuple('Params', [
-    ('latent_factors', np.ndarray),  # Coordinates of cluster centers.
+    ('latent_factors', np.ndarray), 
 ])
 
 
@@ -52,29 +52,30 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
             else:
                 self.latent_pct = latent_pct
             self.model = None
-
+            self.n_hidden = None
 
         # if latent_pct is not None and n_hidden is None:
         # 	self.n_hidden = int(len(self.columns)*latent_pct)
         # else:
         # 	self.n_hidden = 2 if n_hidden is None else n_hidden #DEFAULT = 2 
 
-    def fit(self) -> None:
+    def fit(self, timeout: float = None, iterations : int = None) -> None:
         if self.fitted:
             return
-        if not self.training_inputs:
+        if not hasattr(self, 'training_inputs'):
             raise ValueError("Missing training data.")
 
-        self.fit_transform(self.training_inputs)
+        self.fit_transform(self.training_inputs, timeout, iterations)
         self.fitted = True
         return self
 
-    def produce(self, X : Sequence[Input], y : Sequence[Input] = None) -> Sequence[Output]: 
+    def produce(self, inputs : Sequence[Input], timeout : float = None, iterations : int = None) -> Sequence[Output]: 
 
-        self.columns = list(X)
-        X_ = X[self.columns].values 
+        self.columns = list(inputs)
+        X_ = inputs[self.columns].values 
     	
-       
+        if iterations is not None:
+            self.max_iter = iterations
 
         if not self.fitted:
             if self.model is None and self.latent_pct:
@@ -83,35 +84,43 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
                     anneal = self.anneal, discourage_overlap = self.discourage_overlap, gaussianize = self.gaussianize, 
                     gpu = self.gpu, verbose = self.verbose, seed = self.seed, **self.kwargs)
 
-            self.factors = self.model.fit_transform(X_)
+            self.latent_factors = self.model.fit_transform(X_)
         else:
-            self.factors = self.model.transform(X_)
+            self.latent_factors = self.model.transform(X_)
 
-        return self.factors
+        return self.latent_factors
 
-    def fit_transform(self, X : Sequence[Input], y : Sequence[Input] = None) -> Sequence[Output]:
+    def fit_transform(self, inputs : Sequence[Input], timeout: float = None, iterations : int = None) -> Sequence[Output]:
         
-        self.columns = list(X)
-     	X_ = X[self.columns].values
+        self.columns = list(inputs)
+        X_ = inputs[self.columns].values
 
-        if not self.n_hidden:
+        if self.n_hidden is None:
             self.n_hidden = int(self.latent_pct*len(self.columns))
+
+        if iterations is not None:
+            self.max_iter = iterations
+
 
         if self.model is None and self.latent_pct:
         	self.model = corex_cont.Corex(n_hidden= self.n_hidden, max_iter = self.max_iter, tol = self.tol, 
                 anneal = self.anneal, discourage_overlap = self.discourage_overlap, gaussianize = self.gaussianize, 
                 gpu = self.gpu, verbose = self.verbose, seed = self.seed, **self.kwargs)
 
-    	self.factors = self.model.fit_transform(X_)
+        self.latent_factors = self.model.fit_transform(X_)
         self.fitted = True
-        return self.factors
+        return self.latent_factors
 
-    def set_training_data(self, X : Sequence[Input]) -> None:
-        self.training_inputs = X
+    def set_training_data(self, inputs : Sequence[Input]) -> None:
+        self.training_inputs = inputs
         self.fitted = False
 
     def get_params(self) -> Params:
-        return Params(latent_factors = self.factors)
+        return Params(latent_factors = self.latent_factors)
+
+    def set_params(self, params: Params) -> None:
+        self.latent_factors = params.latent_factors
+
 
     def annotation(self):
         if self._annotation is not None:
@@ -121,7 +130,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
         self._annotation.task = 'FeatureExtraction'
         self._annotation.learning_type = 'UnsupervisedLearning'
         self._annotation.ml_algorithm = ['Dimension Reduction']
-        self._annotation.tags = ['feature_extraction'] #'continuous'
+        self._annotation.tags = ['feature_extraction', 'continuous']
         return self._annotation
 
     def get_feature_names(self):
