@@ -2,7 +2,7 @@ from sklearn import preprocessing
 #import primitive
 import sys
 import os
-import linearcorex.linearcorex.linearcorex as corex_cont
+import corexcontinuous.linearcorex.linearcorex.linearcorex as corex_cont
 #import LinearCorex.linearcorex as corex_cont
 from collections import defaultdict
 from scipy import sparse
@@ -22,7 +22,7 @@ Params = NamedTuple('Params', [
 
 
 class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
-    def __init__(self, n_hidden : int = None, latent_pct : float = None, max_iter : int = 10000, 
+    def __init__(self, n_hidden : int = None, latent_pct : float = .2, max_iter : int = 10000, 
             tol : float = 1e-5, anneal : bool = True, discourage_overlap : bool = True, gaussianize : str = 'standard',  
             gpu : bool = False, verbose : bool = False, seed : int = None, **kwargs) -> None:
         
@@ -39,7 +39,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
         self.seed = seed
 
         self.is_feature_selection = False
-        self.hyperparameters = {'n_hidden': 2} # NOT TRUE, default = latent pct
+        self.hyperparameters = {'n_hidden': None, 'latent_pct': .2} # NOT TRUE, default = latent pct
         
         if n_hidden:
             self.n_hidden = n_hidden
@@ -47,10 +47,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
                 anneal = anneal, discourage_overlap = discourage_overlap, gaussianize = gaussianize, 
                 gpu = gpu, verbose = verbose, seed = seed, **kwargs)
         else:
-            if latent_pct is None:
-                self.latent_pct = .10 # DEFAULT = 10% OF ORIGINAL FACTORS
-            else:
-                self.latent_pct = latent_pct
+            self.latent_pct = latent_pct
             self.model = None
             self.n_hidden = None
 
@@ -79,7 +76,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
 
         if not self.fitted:
             if self.model is None and self.latent_pct:
-                self.n_hidden = int(self.latent_pct*len(self.columns))
+                self.n_hidden = max(1, int(self.latent_pct*len(self.columns)))
                 self.model = corex_cont.Corex(n_hidden= self.n_hidden, max_iter = self.max_iter, tol = self.tol, 
                     anneal = self.anneal, discourage_overlap = self.discourage_overlap, gaussianize = self.gaussianize, 
                     gpu = self.gpu, verbose = self.verbose, seed = self.seed, **self.kwargs)
@@ -96,7 +93,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
         X_ = inputs[self.columns].values
 
         if self.n_hidden is None:
-            self.n_hidden = int(self.latent_pct*len(self.columns))
+            self.n_hidden = max(1,int(self.latent_pct*len(self.columns)))
 
         if iterations is not None:
             self.max_iter = iterations

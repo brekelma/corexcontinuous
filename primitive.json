@@ -1,12 +1,12 @@
 {
-  "id": "4a2468e6-86da-3540-961b-c34824c9bcf7",
-  "name": "corexcontinuous.corex_continuous.CorexContinuous",
+  "id": "bb28d0e6-7b03-3571-8293-d208d76fd7f8",
+  "name": "dsbox.corexcontinuous.corex_continuous.CorexContinuous",
   "common_name": "DSBox Corex Continuous",
   "description": "Return components/latent factors that explain the most multivariate mutual information in the data under Linear Gaussian model. For comparison, PCA returns components explaining the most variance in the data.  Serves as DSBox 'wrapper' for https://github.com/gregversteeg/linearcorex",
   "languages": [
     "python2.7", "python3.5"
   ],
-  "library": "corexcontinuous",
+  "library": "dsbox.corexcontinuous",
   "version": "0.1.5",
   "source_code": "https://github.com/brekelma/corexcontinuous.git",
   "is_class": true,
@@ -18,7 +18,7 @@
       "description": "Transformation of data into continuous latent factors. "
     },
     {
-      "type": "corexcontinuous.linearcorex.linearcorex.linearcorex.Corex",
+      "type": "dsbox.corexcontinuous.linearcorex.linearcorex.linearcorex.Corex",
       "name": "model",
       "description": "Linear Corex model (see https://github.com/gregversteeg/linearcorex)."
     },
@@ -93,7 +93,7 @@
   "methods_available": [
     {
       "name": "fit",
-      "id": "corexcontinuous.corex_continuous.CorexContinuous.fit",
+      "id": "dsbox.corexcontinuous.corex_continuous.CorexContinuous.fit",
       "description": "'Fit the model according to the given training data.\n",
       "returns": {
         "type": "object",
@@ -112,7 +112,7 @@
     },
     {
       "name": "produce",
-      "id": "corexcontinuous.corex_continuous.CorexContinuous.produce",
+      "id": "dsbox.corexcontinuous.corex_continuous.CorexContinuous.produce",
       "description": "'Transform data according to learned model.\n",
       "returns": {
         "type": "array-like",
@@ -132,7 +132,7 @@
       }, 
       {
       "name": "set_training_data",
-      "id": "corexcontinuous.corex_continuous.CorexContinuous.set_training_data",
+      "id": "dsbox.corexcontinuous.corex_continuous.CorexContinuous.set_training_data",
       "description": "Add training data.\n",
       "returns": {
         "type": "object",
@@ -151,7 +151,7 @@
       },
       {
       "name": "set_params",
-      "id": "corexcontinuous.corex_continuous.CorexContinuous.set_params",
+      "id": "dsbox.corexcontinuous.corex_continuous.CorexContinuous.set_params",
       "description": "Set latent factors.\n",
       "returns": {
         "type": "object",
@@ -169,7 +169,7 @@
       },
       {
       "name": "get_params",
-      "id": "corexcontinuous.corex_continuous.CorexContinuous.get_params",
+      "id": "dsbox.corexcontinuous.corex_continuous.CorexContinuous.get_params",
       "description": "Get latent factors.\n",
       "returns": {
         "type": "Params",
