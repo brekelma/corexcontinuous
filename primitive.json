@@ -1,13 +1,13 @@
 {
-  "id": "bb28d0e6-7b03-3571-8293-d208d76fd7f8",
+  "id": "52840184-6a48-3151-8e8d-6ff1ea589134",
   "name": "dsbox.corexcontinuous.corex_continuous.CorexContinuous",
   "common_name": "DSBox Corex Continuous",
   "description": "Return components/latent factors that explain the most multivariate mutual information in the data under Linear Gaussian model. For comparison, PCA returns components explaining the most variance in the data.  Serves as DSBox 'wrapper' for https://github.com/gregversteeg/linearcorex",
   "languages": [
-    "python2.7", "python3.5"
+    "python2.7", "python3.5", "python3.6"
   ],
   "library": "dsbox.corexcontinuous",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "source_code": "https://github.com/brekelma/corexcontinuous.git",
   "is_class": true,
   "attributes": [
@@ -32,14 +32,20 @@
     {
       "type": "int",
       "name": "n_hidden",
-      "description": "Number of components or latent factors to use. Default n_hidden is .1 * #columns",
-      "is_hyperparameter": true
+      "description": "Number of components or latent factors to use. Default n_hidden is .2 * #columns",
+      "is_hyperparameter": true,
+      "default": "None",
+      "range": [0, 10000] ,
+      "kind": "uniform"
     },
     {
       "type": "float",
       "name": "latent_pct",
-      "description": "Instead of n_hidden, specify % of # columns as latent dimension.  Default n_hidden is .1 * #columns",
-      "is_hyperparameter": true
+      "description": "Instead of n_hidden, specify % of # columns as latent dimension.  Default n_hidden is .2 * #columns",
+      "is_hyperparameter": true,
+      "default": ".20",
+      "range": [0,1],
+      "kind": "uniform"
     },
     {
       "type": "int",
@@ -214,5 +220,6 @@
     "mem_per_gpu": [0, 0],
     "expected_running_time": [0, 0]
   },
-  "interface_type": "dimensionality_reduction"
+  "interfaces": ["unsupervised_learning.UnsupervisedLearnerPrimitiveBase"],
+  "interfaces_version": "2017.9.22rc0"
 }
