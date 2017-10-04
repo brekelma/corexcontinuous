@@ -1,5 +1,5 @@
 {
-  "id": "5bb1dff8-2d99-3bf7-b74c-12fa40b84344",
+  "id": "d2d4fefc-0859-3522-91df-7e445f61a69b",
   "name": "corexcontinuous.corex_continuous.CorexContinuous",
   "common_name": "DSBox Corex Continuous",
   "description": "Return components/latent factors that explain the most multivariate mutual information in the data under Linear Gaussian model. For comparison, PCA returns components explaining the most variance in the data.  Serves as DSBox 'wrapper' for https://github.com/gregversteeg/linearcorex",
