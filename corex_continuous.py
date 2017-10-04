@@ -22,6 +22,28 @@ Params = NamedTuple('Params', [
 
 
 class CorexContinuous(UnsupervisedLearnerPrimitiveBase):  #(Primitive):
+    
+    """
+    Return components/latent factors that explain the most multivariate mutual information in the data under Linear Gaussian model. For comparison, PCA returns components explaining the most variance in the data.  Serves as DSBox 'wrapper' for https://github.com/gregversteeg/linearcorex"
+    """
+    __author__ = "Rob Brekelmans <brekelma@usc.edu>, Greg Ver Steeg"
+    __metadata__ = {
+        "team": "ISI DSBox",
+        "common_name": "CorexContinuous",
+        "algorithm_type": ["DimensionalityReduction"],
+        "compute_resources": {
+            "sample_size": [.3424],
+            "sample_unit": ["MB"],
+            "disk_per_node": [],
+            "expected_running_time": [9],
+            "gpus_per_node": [],
+            "cores_per_node": [1],
+            "mem_per_gpu": [],
+            "mem_per_node": [],
+            "num_nodes": [],
+        }
+    }
+
     def __init__(self, n_hidden : int = None, latent_pct : float = .2, max_iter : int = 10000, 
             tol : float = 1e-5, anneal : bool = True, discourage_overlap : bool = True, gaussianize : str = 'standard',  
             gpu : bool = False, verbose : bool = False, seed : int = None, **kwargs) -> None:
