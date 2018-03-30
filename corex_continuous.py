@@ -2,7 +2,7 @@ from sklearn import preprocessing
 #import primitive
 import sys
 import os
-import corexcontinuous.linearcorex.linearcorex.linearcorex as corex_cont
+import linearcorex.linearcorex.linearcorex as corex_cont
 #import LinearCorex.linearcorex as corex_cont
 from collections import defaultdict, OrderedDict
 from scipy import sparse
@@ -53,7 +53,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase[Input, Output, CorexConti
       "name": "corexcontinuous.corex_continuous.CorexContinuous",
       "description": "Return components/latent factors that explain the most multivariate mutual information in the data under Linear Gaussian model. For comparison, PCA returns components explaining the most variance in the data.",
       "python_path": "d3m.primitives.dsbox.CorexContinuous",
-      "original_python_path": "corexcontinuous.corex_continuous.CorexContinuous",
+      "original_python_path": "dsbox_corex.corexcontinuous.corex_continuous.CorexContinuous",
       "source": {
             "name": config.D3M_PERFORMER_TEAM,
             "contact": config.MAIL_TO,
