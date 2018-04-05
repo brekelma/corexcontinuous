@@ -22,7 +22,7 @@ from d3m.metadata.hyperparams import Uniform, UniformInt, Union, Enumeration
 from typing import NamedTuple, Optional, Sequence, Any
 import typing
 
-from .. import config
+#from .. import config
 
 Input = container.DataFrame
 Output = container.ndarray
@@ -49,23 +49,21 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase[Input, Output, CorexConti
     metadata = PrimitiveMetadata({
       "schema": "v0",
       "id": "d2d4fefc-0859-3522-91df-7e445f61a69b",
-      "version": config.VERSION,
+      "version": "1.0.0",
       "name": "corexcontinuous.corex_continuous.CorexContinuous",
       "description": "Return components/latent factors that explain the most multivariate mutual information in the data under Linear Gaussian model. For comparison, PCA returns components explaining the most variance in the data.",
       "python_path": "d3m.primitives.dsbox.CorexContinuous",
       "original_python_path": "dsbox_corex.corexcontinuous.corex_continuous.CorexContinuous",
       "source": {
-            "name": config.D3M_PERFORMER_TEAM,
-            "contact": config.MAIL_TO,
-            "uris": [ config.REPOSITORY ]
+            "name": "ISI",
+            "contact": 'mailto:brekelma@usc.edu',
+            "uris": [ 'https://github.com/brekelma/dsbox_corex' ]
             },
       "installation": [
-        config.INSTALLATION 
-       # {
-       #   "type":"PIP",
-       #   "package":"corextext",
-       #  "version":"0.2.10"
-       # }
+            {
+             'type': 'PIP', 
+             'package_uri': 'git+https://github.com/brekelma/dsbox_corex@e1cf26dff2ba2957626181f26fe121491691d0fe#egg=dsbox_corex'
+            }
         ],
       "algorithm_types": ["EXPECTATION_MAXIMIZATION_ALGORITHM"],
       "primitive_family": "FEATURE_CONSTRUCTION",
