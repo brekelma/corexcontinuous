@@ -73,13 +73,13 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase[Input, Output, CorexConti
     #  "effects": [],
 
     #def __init__(self, n_hidden : Any = None, max_iter : int = 10000, 
-    def __init__(self, *, hyperparams : CorexContinuous_Hyperparams, random_seed : int =  0, docker_containers: typing.Dict[str, DockerContainer] = None) -> None:
+    def __init__(self, *, hyperparams : CorexContinuous_Hyperparams) -> None: #, random_seed : int =  0, docker_containers: typing.Dict[str, DockerContainer] = None
         # Additional Corex Parameters set to defaults:  see github.com/gregversteeg/LinearCorex
         
         #tol : float = 1e-5, anneal : bool = True, discourage_overlap : bool = True, gaussianize : str = 'standard',  
         #gpu : bool = False, verbose : bool = False, seed : int = None, **kwargs) -> None:
         
-        super().__init__(hyperparams = hyperparams, random_seed = random_seed, docker_containers = docker_containers)
+        super().__init__(hyperparams = hyperparams)# random_seed = random_seed, docker_containers = docker_containers)
         
 
 
