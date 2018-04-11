@@ -133,7 +133,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase[Input, Output, CorexConti
         self.fitted = True
         return self.latent_factors
 
-    def set_training_data(self, *, inputs : Input, outputs : Output = None) -> None:
+    def set_training_data(self, *, inputs : Input, outputs : Output) -> None:
         self.training_inputs = inputs
         self.fitted = False
 
