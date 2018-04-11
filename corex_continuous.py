@@ -12,7 +12,7 @@ import numpy as np
 import d3m.container as container
 import d3m.metadata.hyperparams as hyperparams
 import d3m.metadata.params as params
-from d3m.metadata.base import PrimitiveMetadata
+from d3m.metadata.base import PrimitiveMetadata, DockerContainer
 
 from d3m.primitive_interfaces.unsupervised_learning import UnsupervisedLearnerPrimitiveBase
 from d3m.primitive_interfaces.base import CallResult
@@ -73,7 +73,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase[Input, Output, CorexConti
     #  "effects": [],
 
     #def __init__(self, n_hidden : Any = None, max_iter : int = 10000, 
-    def __init__(self, *, hyperparams : CorexContinuous_Hyperparams, random_seed : int =  0, docker_containers: typing.Dict[str, str] = None) -> None:
+    def __init__(self, *, hyperparams : CorexContinuous_Hyperparams, random_seed : int =  0, docker_containers: typing.Dict[str, DockerContainer] = None) -> None:
         # Additional Corex Parameters set to defaults:  see github.com/gregversteeg/LinearCorex
         
         #tol : float = 1e-5, anneal : bool = True, discourage_overlap : bool = True, gaussianize : str = 'standard',  
