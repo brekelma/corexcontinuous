@@ -22,6 +22,7 @@ from d3m.metadata.hyperparams import Uniform, UniformInt, Union, Enumeration
 from typing import NamedTuple, Optional, Sequence, Any
 import typing
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 #from .. import config
 
 Input = container.DataFrame
