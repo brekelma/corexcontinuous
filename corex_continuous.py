@@ -128,7 +128,11 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase[Input, Output, CorexConti
             self.n_hidden = max(1,int(self.hyperparams['n_hidden']*len(self.columns)))
 
         if not hasattr(self, 'model') or self.model is None:
+            _stdout = sys.stdout
+            null = open(os.devnull,'wb')
+            sys.stdout = null
             self.model = corex_cont.Corex(n_hidden= self.n_hidden, max_iter = self.max_iter)
+            sys.stdout = _stdout
 
         self.latent_factors = self.model.fit_transform(X_)
         self.fitted = True
