@@ -63,7 +63,7 @@ class CorexContinuous(UnsupervisedLearnerPrimitiveBase[Input, Output, CorexConti
       "installation": [
             {
              'type': 'PIP', 
-             'package_uri': 'git+https://github.com/brekelma/dsbox_corex.git@e4514f000608fed2976240e0ffe6032463e86bee#egg=dsbox-corex'
+             'package_uri': 'git+https://github.com/brekelma/dsbox_corex.git@8672da14a7f2e00ea488da460ad68ef0799a9532#egg=dsbox-corex'
             }
         ],
       "algorithm_types": ["EXPECTATION_MAXIMIZATION_ALGORITHM"],
